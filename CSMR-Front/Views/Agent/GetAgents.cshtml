@@ -1,0 +1,96 @@
+﻿@model List<CSMR_Front.Models.AgentModel>
+@section Scripts
+{
+<script type="text/javascript">
+    function Activate(id,check) {
+        $.ajax({
+            type: "POST",
+            url: "/Agent/Update",
+            data: {
+                id: id,
+                check: check,
+                isActive: true
+            },
+
+            success: function (result) {
+                if (result == "true") { alert('Сохранено'); location.reload() }
+                else { alert(result); location.reload() }
+            }
+        })
+    }
+    function Test(id, check) {
+        $.ajax({
+            type: "POST",
+            url: "/Agent/Update",
+            data: {
+                id: id,
+                check: check,
+                isActive: false
+            },
+
+            success: function (result) {
+                if (result == "true") { alert('Сохранено'); location.reload() }
+                else { alert(result); location.reload() }
+            }
+        })
+    }
+</script>
+}
+<div class="divAll">
+    <div class="alert alert-primary">
+        <div>
+            <center><h2>Агенты</h2></center>
+            <br />
+            <br />
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Наименование</th>
+                            <th scope="col">Аккаунт</th>
+                            <th scope="col">Выполненые запросы</th>
+                            <th scope="col">Оставшие запросы</th>
+                            <th scope="col">Активен</th>
+                            <th scope="col">В тесте</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@item.Id</th>
+                                    <td>@item.Name</td>
+                                    <td>@item.Login</td>
+                                    <td>@item.QueryCount</td>
+                                    <td>@item.Query</td>
+                                    @if(item.IsActive)
+                                    {                                    
+                                        <td><input type="checkbox" checked id="isActive" onchange="Activate(@item.Id,false)"/></td>
+                                    }
+                                    else
+                                    {
+                                        <td><input type="checkbox" id="isActive" onchange="Activate(@item.Id,true)"/></td>
+                                    }
+                                    @if(item.IsTest)
+                                    {
+                                        <td><input type="checkbox" checked id="isTest" onchange="Test(@item.Id,false)"/></td>
+                                    }
+                                    else
+                                    {
+                                        <td><input type="checkbox" id="isTest" onchange="Test(@item.Id,true)"/></td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+                <br />
+                <br />
+                <h2>@ViewBag.Message</h2>
+            </div>
+        </div>
+</div>

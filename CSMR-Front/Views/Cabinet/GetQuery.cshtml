@@ -1,0 +1,80 @@
+﻿@model List<CSMR_Front.Models.QueryModel>
+@{
+    int count = 0;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#agents').load("/Agent/List");
+        });
+        function filter() {
+            let from = $('#from').val();
+            let to = $('#to').val();
+            location.replace("/Cabinet/GetQuery?from=" + from + "&to=" + to);
+        }
+    </script>
+}
+<div class="divAll">
+    <div class="alert alert-primary">
+        <div>
+            <div>
+                <center><h2>Отчет по начислению запросов</h2></center>
+                <br />
+                <br />
+                <h5>Фильтр</h5>
+                <div class="form-group d-flex row align-items-center justify-content-center">
+
+                    <div class="input-group date col-3" data-provide="datepicker" data-date-format="dd.mm.yyyy">
+                        <input type="text" id="from" value="@ViewBag.From" class="form-control">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group date col-3" data-provide="datepicker" data-date-format="dd.mm.yyyy">
+                        <input type="text" id="to" value="@ViewBag.To" class="form-control">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                    <input type="button" onclick="filter()" value="Отобразить" />
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Начислено</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">На основании</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@(count+1)</th>
+                                    <td>@item.QueryCount</td>
+                                    <td>@item.AddDate</td>
+                                    <td>
+                                        @using (Html.BeginForm("GetFile", "Cabinet", new { fileBite = item.FileBite, fileName = item.FileName, fileType = item.FileType }, FormMethod.Post, true, null))
+                                        {
+                                            <button type="submit">@item.FileName</button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+            <h2>@ViewBag.Message</h2>
+        </div>
+    </div>
+</div>

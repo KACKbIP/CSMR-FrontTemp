@@ -1,0 +1,16 @@
+﻿@model List<CSMR_Front.Models.AgentModel>
+@{
+    Layout = null;
+}
+
+<select id="agentList" name="agent" class="form-control col-6">
+
+    @if (Model != null)
+    {
+        <option value="0"></option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    }
+</select>

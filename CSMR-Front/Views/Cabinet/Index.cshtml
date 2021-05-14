@@ -1,0 +1,51 @@
+﻿@model CSMR_Front.Models.CabinetModel
+
+@if (@Model == null)
+{
+    <center><h2>@ViewBag.Message</h2></center>
+}
+else
+{
+<div class="divAll">
+    <center><h2>@Model.AgentName</h2></center>
+    <br />
+    <br />
+    <div class="alert alert-primary">
+
+
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="account">Аккаунт</label>
+            <input type="text" class="form-control col-6" id="account" value="@User.Identity.Name" required>
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="queryCount">Количество выполненых запросов</label>
+            <input type="text" class="form-control col-6" id="queryCount" value="@Model.QueryCount">
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="query">Количество оставших запросов</label>
+            <input type="text" class="form-control col-6" id="query" value="@Model.Query" required>
+        </div>
+        <div class="row justify-content-center">
+            @if (ViewBag.Data != null)
+            {
+                foreach (var item in ViewBag.Data as List<TarifModel>)
+                {
+                <div class="alert alert-warning col-1 border-dark">
+                    <div>
+                        <i>@item.Name</i>
+                    </div>
+                    <br />
+                    <div>
+                        <label>@item.QueryCount запросов</label>
+                    </div>
+                    <br />
+                    <div>
+                        <label>@item.Sum тг</label>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+}

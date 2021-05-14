@@ -1,0 +1,55 @@
+﻿@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#agents').load("/Agent/List");
+            $('#tarifs').load("/Cabinet/TarifList");
+        });
+        function addTarifAgent() {
+            let agent = $('#agentList').val();
+            let tarif = $('#tarifList').val();
+            let sumTarif = $('#sumTarif').val();
+            $.ajax({
+                type: "POST",
+                url: "/Cabinet/addTarifAgent",
+                data: {
+                    agent: agent,
+                    tarif: tarif,
+                    sumTarif: sumTarif
+                },
+
+                success: function (result) {
+                    if (result == "true") { location.replace("/Cabinet/Tarif") }
+                    else { alert(result) }
+                }
+            })
+        }
+    </script>
+}
+
+
+<div class="divAll">
+    <div class="alert alert-primary">
+        <center><h2>Добавить тариф</h2></center>
+        <br />
+        <br />
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="agentList">Агент</label>
+            <span id="agents" name="agent" class="col-6">
+            </span>
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="tarifList">Тариф</label>
+            <span id="tarifs" name="tarif" class="col-6">
+            </span>
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="sumTarif">Сумма тарифа</label>
+            <input type="number" class="form-control col-6" id="sumTarif" required>
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="button"></label>
+            <input type="submit" class="btn btn-warning" id="button" onclick="addTarifAgent()" value="Добавить" required>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿
+<div class="divAll">
+    <div class="alert alert-primary ">
+        <center><h2>API протокол для идентификация по фото</h2></center>
+        <br />
+        <br />
+<pre style="text-align: left;">    <em>При успешном запросе  code 0 и message Success</em>
+<em>    При неудачном запросе code -1 и message не будет равным Success</em></pre>
+        <h4 style="text-align: left;">&nbsp; &nbsp; 1) Для получения информации по личному кабинету:</h4>
+        <p style="text-align: left;">&nbsp; &nbsp; Нужно отправить <strong>POST</strong> запрос на <em>https://url/GetCabinet</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <em>Тело запроса:</em></p>
+        <ul>
+            <li style="list-style-type: none; text-align: left;">&nbsp; {</li>
+        </ul>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;Login&quot;:&quot;TestAgent4&quot;,</p>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;Password&quot;: &quot;test&quot;,</p>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;Token&quot;:&quot;test$DSFQWE2!!2#xcFtest#$sSFsd&quot;</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; }</p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>Login</strong> - <em>формат string;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>Password&nbsp;</strong>- <em>формат string;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>Token</strong> - <em>формат string;</em></p>
+        <p style="text-align: left;"><br></p>
+        <p style="text-align: left;"><em>&nbsp; &nbsp; Ответ запроса:</em></p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; {</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;code&quot;: 0,</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;message&quot;: &quot;Success&quot;,</p>
+        <p style="margin-left: 40px; text-align: left;"></p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;data&quot;: {</p>
+        <p style="text-align: left;"></p>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;agentId&quot;: 5,</p>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;agentName&quot;: &quot;Тестовый Агент 4&quot;,</p>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;queryCount&quot;: 3,</p>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;query&quot;: 297,</p>
+        <p style="margin-left: 60px; text-align: left;">&nbsp; &nbsp; &quot;isTest&quot;: true</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; }</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; }</p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>agentId</strong> - <em>Ваш Id в нашей системе;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>agentName</strong> - <em>Ваше юридическое наименование;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>queryCount</strong> - <em>успешно выполненные запросы идентификации;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>query</strong> - <em>количество оставшихся запросов идентификации;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>isTest</strong> - <em>Ваш статус</em></p>
+        <p style="text-align: left;"><br></p>
+        <h4 style="text-align: left;">&nbsp; &nbsp; <strong>2) Для выполнения идентификации по фото</strong></h4>
+        <p style="text-align: left;">&nbsp; &nbsp; Нужно отправить <strong>POST</strong> запрос на <em>https://url/Identity</em></p>
+        <p style="text-align: left;"></p>
+        <p style="text-align: left;"><em>&nbsp; &nbsp; Тело запроса:</em></p>
+        <p style="text-align: left;"></p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; {</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;Login&quot;:&quot;TestAgent4&quot;,</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;Password&quot;: &quot;test&quot;,</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;Token&quot;:&quot;test$DSFQWE2!!2#xcFtest#$sSFsd&quot;,</p>
+        <p style="margin-left: 40px; text-align: left;"></p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;Data&quot;: {</p>
+        <p style="text-align: left;"></p>
+        <p style="margin-left: 80px; text-align: left;">&nbsp; &nbsp; &quot;IIN&quot;:&quot;960202350995&quot;,</p>
+        <p style="margin-left: 80px; text-align: left;">&nbsp; &nbsp; &quot;Photo&quot;:&quot;BASE64&quot;</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; }</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; }</p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>Login</strong> - <em>формат string;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>Password</strong> - <em>формат string;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>Token </strong>- <em>формат string;</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>IIN</strong> - <em>формат string (12 символов);</em></p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>Photo</strong> - <em>фотография в формате <strong>BASE64</strong></em></p>
+        <p style="text-align: left;"></p>
+        <p style="text-align: left;"><em>&nbsp; &nbsp; Ответ запроса:</em></p>
+        <p style="text-align: left;"></p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; {</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;code&quot;: 0,</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;message&quot;: &quot;Success&quot;,</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; &quot;data&quot;: 99.512500</p>
+        <p style="margin-left: 40px; text-align: left;">&nbsp; &nbsp; }</p>
+        <p style="text-align: left;">&nbsp; &nbsp; <strong>data&nbsp;</strong>- <em>р</em><em>езультат идентификации указанный в проценте</em></p>
+    </div>
+</div>

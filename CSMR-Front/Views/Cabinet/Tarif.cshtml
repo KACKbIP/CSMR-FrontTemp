@@ -1,0 +1,102 @@
+﻿@model List<CSMR_Front.Models.TarifModel>
+@{
+    int count = 0;
+}
+@section Scripts
+{
+    <script type="text/javascript">    
+        function deleteTarif(id) {
+            $.ajax({
+                type: "POST",
+                url: "/Cabinet/DeleteTarif",
+                data: {
+                    id: id
+                },
+
+                success: function (result) {
+                    if (result == "true") { alert('Удалено'); window.location.reload(); }
+                    else { alert(result) }
+                }
+            })
+        }
+        function changeSum(id) {
+            let sum = document.getElementById(id+' sum').value;
+            $.ajax({
+                type: "POST",
+                url: "/Cabinet/ChangeTarifSum",
+                data: {
+                    id: id,
+                    sum: sum
+                },
+
+                success: function (result) {
+                    if (result == "true") { alert('Изменено') }
+                    else { alert(result) }
+                }
+            })
+        }
+    </script>
+}
+<div class="divAll">
+    <div class="alert alert-primary">
+        <center><h2>Тарифы</h2></center>
+        <br />
+        <br />
+        <div>
+            @Html.ActionLink("Добавить тариф", "AddTarif")
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {                
+            <div class="alert alert-warning col-1 border-dark">
+                <div>
+                    <i>@item.Name</i>
+                </div>
+                <br />
+                <div>
+                    <label>@item.QueryCount запросов</label>
+                </div>
+                <br />
+                <div>
+                    <input type="button" class="alert-danger" onclick="deleteTarif(@item.Id)" value="Удалить" />
+                </div>
+            </div>
+            }
+        </div>
+        <div>
+            <div>
+                @Html.ActionLink("Добавить тариф агенту", "AddTarifAgent")
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Агент</th>
+                            <th scope="col">Тариф</th>
+                            <th scope="col">Сумма</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.Data != null)
+                        {
+                            foreach (var item in ViewBag.Data as List<CSMR_Front.Models.TarifAgentModel>)
+                            {
+                                <tr>
+                                    <th scope="row">@(count + 1)</th>
+                                    <td>@item.AgentName</td>
+                                    <td>@item.TarifName</td>
+                                    <td>
+                                        <input type="number" id="@item.Id sum" value="@item.TarifSum" />
+                                    </td>
+                                    <td> <input type="button" onclick="changeSum(@item.Id)" value="Изменить" /></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

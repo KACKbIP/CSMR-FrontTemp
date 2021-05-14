@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Индентификация</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="../wwwroot/css/Layout.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <script src="@Url.Content("~/js/jquery-3.5.1.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/js/jquery-3.5.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/js/bootstrap.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/js/bootstrap-datepicker.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/js/bootstrap-datepicker.min.js")" type="text/javascript"></script>
+</head>
+<body style="background-image: url('../img/Background_White.gif');background-repeat: no-repeat;background-size: cover;">
+    <header>
+        <div class="row">
+            <div class="col-sm">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
+                    <div class="container">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <ul class="navbar-nav flex-grow-1">
+                                @if (!User.IsInRole("P7ktrav5PL5BgPHTxF7eTFTmbtaMWpPpvzZJmtDSDwEgACQcqdxaNLta8CcZ"))
+                                {
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Cabinet/Index'" value="Кабинет" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Identity/Index'" value="Идентификация" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Identity/Report'" value="Отчет по идентификации" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Cabinet/GetQuery'" value="Отчет по начислению запросов" class="btn btn-secondary" />
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Agent/GetAgents'" value="Агенты" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Agent/AddAgent'" value="Добавить агента" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Agent/GetQuery'" value="Отчет по начислению запросов" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Agent/AddQuery'" value="Начислить запросы" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/Identity/ReportAll'" value="Отчет по идентификации" class="btn btn-secondary" />
+                                    </li>
+                                    <li class="nav-item">
+                                        <input type="submit" onclick="window.location='/cabinet/Tarif'" value="Тарифы" class="btn btn-secondary" />
+                                    </li>
+                                }
+                                <li class="nav-item">
+                                    <input type="submit" onclick="window.location='/Documentation/Index'" value="Документация" class="btn btn-secondary" />
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </nav>
+            </div>
+            <div class=".col-xs-6 .col-sm-3">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (!User.IsInRole("P7ktrav5PL5BgPHTxF7eTFTmbtaMWpPpvzZJmtDSDwEgACQcqdxaNLta8CcZ"))
+                        {
+                            <li class="nav-item">
+                                <input type="submit" onclick="window.location='/Cabinet/Index'" value="@User.Identity.Name" class="btn btn-secondary" />
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <input type="submit" onclick="window.location='/Agent/GetAgents'" value="@User.Identity.Name" class="btn btn-secondary" />
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <input type="submit" value="Сменить пароль" class="btn btn-warning" onclick="window.location='/Login/ChangePassword'" />
+                        </li>
+                        <li class="nav-item">
+                            <input type="submit" onclick="window.location='/Login/Logout'" value="Выход" class="btn btn-danger" />
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+</header>
+    <center>
+        <div style="margin-top:5%">
+            @RenderBody()
+        </div>
+    </center>
+
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

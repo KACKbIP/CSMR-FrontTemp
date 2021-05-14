@@ -1,0 +1,43 @@
+﻿@section Scripts
+{
+    <script type="text/javascript">
+        function addTarif() {
+            let nameTarif = $('#nameTarif').val();
+            let queryCount = $('#queryCount').val();
+            $.ajax({
+                type: "POST",
+                url: "/Cabinet/AddTarif",
+                data: {
+                    nameTarif: nameTarif,
+                    queryCount: queryCount
+                },
+
+                success: function (result) {
+                    if (result == "true") { location.replace("/Cabinet/Tarif") }
+                    else { alert(result) }
+                }
+            })
+        }
+    </script>
+}
+
+
+<div class="divAll">
+    <div class="alert alert-primary">
+        <center><h2>Добавить тариф</h2></center>
+        <br />
+        <br />
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="nameTarif">Наименование тарифа</label>
+            <input type="text" class="form-control col-6" id="nameTarif" required>
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="queryCount">Число запросов</label>
+            <input type="number" class="form-control col-6" id="queryCount">
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="button"></label>
+            <input type="submit" class="btn btn-warning" id="button" onclick="addTarif()" value="Добавить" required>
+        </div>
+    </div>
+</div>

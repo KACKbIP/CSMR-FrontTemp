@@ -1,0 +1,26 @@
+﻿<body>
+    <center>
+        <div class="divAll">
+            <div class="alert alert-primary">
+
+                <h2 class="form-title">Идентификация</h2>
+                <h5 style="color:red">@ViewBag.Validate</h5>
+                <br />
+                <br />
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="iin"><i class="zmdi zmdi-account material-icons-name">ИИН</i></label>
+                        <input type="text" name="iin" id="iin" placeholder="введите ИИН" />
+                    </div>
+                    <div class="form-group">
+                        <label for="file"><i class="zmdi zmdi-lock">Вложить фото</i></label>
+                        <input type="file" name="file" accept="image/jpeg,image/png,image/gif" id="file" />
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="send" id="send" class="form-submit" value="Отправить" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </center>
+</body>

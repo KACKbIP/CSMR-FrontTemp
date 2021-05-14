@@ -1,0 +1,36 @@
+﻿@section Scripts
+{
+    <script type="text/javascript">
+        function addAgent() {
+            let account = $('#account').val();
+            let name = $('#name').val();
+            let isTest = document.getElementById("isTest").checked;
+            window.location.href = "/Agent/AddAgentMethod?account=" + account + "&name=" + name + "&isTest=" + isTest;
+        }
+    </script>
+}
+
+
+<div class="divAll">
+    <div class="alert alert-primary">
+        <center><h2>Добавить агента</h2></center>
+        <br />
+        <br />
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="account">Аккаунт</label>
+            <input type="text" class="form-control col-6" id="account" required>
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="name">Полное наименование</label>
+            <input type="text" class="form-control col-6" id="name">
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="isTest">В тесте</label>
+            <input type="checkbox" class="form-control col-6" id="isTest" required>
+        </div>
+        <div class="form-group d-flex row align-items-center justify-content-left">
+            <label class="col-5" for="button"></label>
+            <input type="submit" class="btn btn-warning" id="button" onclick="addAgent()" value="Добавить" required>
+        </div>
+    </div>
+</div>

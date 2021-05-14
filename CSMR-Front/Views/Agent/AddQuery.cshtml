@@ -1,0 +1,37 @@
+﻿@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#agents').load("/Agent/List");
+        });
+    </script>
+}
+
+<div class="divAll">
+
+    <div class="alert alert-primary">
+        <center><h2>Начислить запросы Агенту</h2></center>
+
+        <h4 style="color:red">@ViewBag.Message</h4>
+        <br />
+        <br />
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group d-flex row align-items-center justify-content-left">
+                <label class="col-5" for="agentList">Агент</label>
+                <span id="agents" name="agent" class="col-6">
+                </span>
+            </div>
+            <div class="form-group d-flex row align-items-center justify-content-left">
+                <label class="col-5" for="count">Введите количество запросов</label>
+                <input type="number" name="count" class="form-control col-6" id="count" required>
+            </div>
+            <div class="form-group d-flex row align-items-center justify-content-left">
+                <label class="col-5" for="file">Вложить файл основания</label>
+                <input type="file" name="file" id="file" />
+            </div>
+            <div class="form-group form-button">
+                <input type="submit" name="send" id="send" class="btn btn-warning" value="Отправить" />
+            </div>
+        </form>
+    </div>
+</div>
